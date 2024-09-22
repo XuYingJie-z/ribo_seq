@@ -4,8 +4,8 @@
 #SBATCH --partition=64c512g      # small 队列
 #SBATCH -n 16                # 总核数需 <=20
 #SBATCH --ntasks-per-node=16   # 每节点核数
-#SBATCH --output=%j.out
-#SBATCH --error=%j.err
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
 
 # 软件在 riboseq 环境 ， 导入工具函数
 source ./utils.sh
@@ -14,7 +14,7 @@ source activate riboseq
 
 
 # 文件夹不存在则创建文件夹
-batch_test_folder ../trimmed ../trimmed_fastqc ../origin_fastqc
+batch_test_folder ../trimmed ../trimmed_fastqc ../origin_fastqc ../log
 
 
 # 检查软件
@@ -96,3 +96,7 @@ End qc and trimed  $sample_name
 ############################################################## 
 \033[0m" 
 
+# 移动一下 log 到文件夹
+
+mv  ./${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err ../log/call_ORF/${SLURM_JOB_NAME}_${sample_name}_${SLURM_JOB_ID}.err
+mv  ./${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out ../log/call_ORF/${SLURM_JOB_NAME}_${sample_name}_${SLURM_JOB_ID}.out
