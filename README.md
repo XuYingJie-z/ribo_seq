@@ -1,7 +1,7 @@
 # Ribo-seq 
 
 
-> 注意，文件夹下所有的 single 结尾的脚本都是处理单端测序的样本，
+> 注意，文件夹下所有的 single 结尾的脚本都是处理单端测序的样本。本质 ribo seq 需要短读长的测序，看文章里很多都是用单端 50bp 的短读长测序，问了华大测序公司，这种测序方法现在用户比较少，所以很贵
 
 
 ## 准备
@@ -26,7 +26,8 @@ riboseq_star/
 ## 比对
 
 
-* ribo-seq 和 RNA seq 最主要的区别是 riboseq 的比对是先把测序数据去除掉 tRNA 和 rRNA 的部分，然后比对到转录组，下载 tRNA 和 rRNA 的数据,
+* ribo-seq 和 RNA seq 最主要的区别是 riboseq 的比对是先把测序数据去除掉 tRNA 和 rRNA 的部分，然后比对到转录组，下载 tRNA 和 rRNA 的数据的方法在笔记 ‘基因组索引、文件格式、教程’ 中
+* 下面的代码就是用 botiew 去掉 rRNA 和 tRNA 的数据，然后下面用 star 进行比对。
 * 输出文件 ../mapping/${sample_name}_rm_rRNA.fq.gz 就可以用 star 进行比对了，star 还挺好用，会自动输出比对到转录组上的文件
 * 注意这是双端测序的写法，但是理论上 riboseq 用单端50bp或者 75bp 就足够了，单端测序输入是 -U
 
